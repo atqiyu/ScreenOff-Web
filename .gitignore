@@ -3,10 +3,19 @@ __pycache__/
 *.py[cod]
 *.pyo
 
+# 构建产物（发布时作为 GitHub Release 附件，不进仓库）
+dist/
+build/
+tools/
+*.spec
+icon.ico
+
 # 测试 / 临时产物
 _test_*
 _s.json
 _decoded.txt
+_*.png
+*.log
 
 # 编辑器
 .vscode/

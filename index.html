@@ -9,82 +9,121 @@
   :root{
     --bg:#0d1117; --card:#161b22; --line:#2d333b;
     --txt:#e6edf3; --dim:#8b949e;
-    --green:#3fb950; --red:#f85149; --blue:#58a6ff;
+    --green:#3fb950; --red:#f85149; --blue:#58a6ff; --amber:#d29922;
   }
   *{box-sizing:border-box;margin:0;padding:0}
   body{
     font-family:"Segoe UI","Microsoft YaHei",system-ui,sans-serif;
     background:radial-gradient(1100px 700px at 25% -10%, #1a2230 0%, var(--bg) 55%);
     color:var(--txt);min-height:100vh;
-    display:flex;align-items:center;justify-content:center;padding:24px;
+    display:flex;align-items:center;justify-content:center;padding:20px;
   }
   .card{
-    width:100%;max-width:520px;background:var(--card);
-    border:1px solid var(--line);border-radius:20px;padding:30px;
+    width:100%;max-width:580px;background:var(--card);
+    border:1px solid var(--line);border-radius:20px;padding:26px 26px 22px;
     box-shadow:0 20px 60px rgba(0,0,0,.45);
   }
-  header{display:flex;align-items:center;justify-content:space-between;margin-bottom:26px}
-  h1{font-size:18px;font-weight:700;letter-spacing:.5px}
-  h1 span{color:var(--dim);font-weight:400;font-size:13px;margin-left:8px}
+  header{display:flex;align-items:center;justify-content:space-between;margin-bottom:20px}
+  h1{font-size:17px;font-weight:700;letter-spacing:.5px}
+  h1 span{color:var(--dim);font-weight:400;font-size:12px;margin-left:8px}
   .net{font-size:12px;color:var(--dim);display:flex;align-items:center;gap:6px}
   .net::before{content:"";width:8px;height:8px;border-radius:50%;background:var(--dim)}
   .net.ok{color:var(--green)} .net.ok::before{background:var(--green)}
   .net.bad{color:var(--red)} .net.bad::before{background:var(--red)}
 
-  .stage{text-align:center;margin-bottom:8px}
-  .dot{
-    width:110px;height:110px;border-radius:50%;margin:0 auto 20px;position:relative;
-    transition:.4s;
-  }
-  .dot.on{
-    background:radial-gradient(circle at 35% 30%, #7ee787, #3fb950 60%, #2ea043);
-    box-shadow:0 0 45px rgba(63,185,80,.4);
-  }
-  .dot.off{
-    background:radial-gradient(circle at 35% 30%, #586069, #30363d 70%);
-    box-shadow:inset 0 0 22px rgba(0,0,0,.65);
-  }
-  .dot.on::after{
-    content:"";position:absolute;inset:-14px;border-radius:50%;
-    border:2px solid rgba(63,185,80,.35);
-    animation:pulse 2s ease-out infinite;
-  }
-  @keyframes pulse{0%{transform:scale(.92);opacity:1}100%{transform:scale(1.3);opacity:0}}
+  .stage{text-align:center;margin-bottom:6px}
+  .dot{width:96px;height:96px;border-radius:50%;margin:0 auto 16px;position:relative;transition:.4s}
+  .dot.on{background:radial-gradient(circle at 35% 30%, #7ee787, #3fb950 60%, #2ea043);
+          box-shadow:0 0 45px rgba(63,185,80,.4)}
+  .dot.off{background:radial-gradient(circle at 35% 30%, #586069, #30363d 70%);
+           box-shadow:inset 0 0 22px rgba(0,0,0,.65)}
   .dot.unknown{background:radial-gradient(circle at 35% 30%, #d29922, #7d5b0e 70%)}
-  #state{font-size:26px;font-weight:700}
-  #sub{color:var(--dim);font-size:14px;margin-top:6px}
+  .dot.on::after{content:"";position:absolute;inset:-14px;border-radius:50%;
+    border:2px solid rgba(63,185,80,.35);animation:pulse 2s ease-out infinite}
+  @keyframes pulse{0%{transform:scale(.92);opacity:1}100%{transform:scale(1.3);opacity:0}}
+  #state{font-size:24px;font-weight:700}
+  #sub{color:var(--dim);font-size:13.5px;margin-top:5px}
 
-  .btns{display:flex;gap:12px;margin:26px 0 10px}
+  .btns{display:flex;gap:10px;margin:20px 0 12px}
   button{
-    flex:1;padding:16px;border-radius:14px;border:1px solid var(--line);
-    font-size:16px;font-weight:600;cursor:pointer;color:var(--txt);
+    padding:12px 14px;border-radius:12px;border:1px solid var(--line);
+    font-size:14px;font-weight:600;cursor:pointer;color:var(--txt);
     background:#21262d;transition:.15s;font-family:inherit;
   }
   button:hover{filter:brightness(1.2)}
   button:active{transform:scale(.97)}
+  button:disabled{opacity:.5;cursor:default}
+  .btns button{flex:1;padding:15px;font-size:15px}
   #btn-off{background:#3a1d21;border-color:#67262e}
   #btn-on{background:#12321e;border-color:#1d5c36}
   .delay{display:flex;align-items:center;justify-content:center;gap:8px;
-         color:var(--dim);font-size:13px;margin-bottom:22px}
-  select{
-    background:#21262d;color:var(--txt);border:1px solid var(--line);
-    border-radius:8px;padding:4px 10px;font-size:13px;font-family:inherit;
+         color:var(--dim);font-size:12.5px;margin-bottom:4px;flex-wrap:wrap}
+  select,input[type=number],input[type=time],input[type=datetime-local],input[type=text]{
+    background:#0d1117;color:var(--txt);border:1px solid var(--line);
+    border-radius:9px;padding:8px 10px;font-size:13px;font-family:inherit;
   }
+  input:focus,select:focus{outline:1px solid var(--blue);border-color:var(--blue)}
 
-  .meta{
-    border-top:1px solid var(--line);padding-top:16px;
-    display:grid;grid-template-columns:1fr 1fr;gap:10px 18px;font-size:13px;
-  }
+  .section{border-top:1px solid var(--line);margin-top:20px;padding-top:16px}
+  .sec-title{font-size:13.5px;font-weight:700;color:#c9d1d9;margin-bottom:12px;
+             display:flex;align-items:center;gap:8px}
+  .sec-title .hint{font-weight:400;color:var(--dim);font-size:11.5px;margin-left:auto}
+  .row{display:flex;gap:8px;align-items:center;flex-wrap:wrap;margin-bottom:10px}
+  .row.actions{justify-content:space-between}
+
+  .seg{display:inline-flex;border:1px solid var(--line);border-radius:10px;overflow:hidden}
+  .seg button{border:0;border-radius:0;padding:8px 14px;font-size:12.5px;background:#0d1117;color:var(--dim)}
+  .seg button.active{background:#1f6feb33;color:var(--blue)}
+  .seg button.active.off{background:#8b2c3633;color:#ff9c96}
+
+  .preset{display:flex;gap:6px;flex-wrap:wrap}
+  .preset button{padding:7px 11px;font-size:12px;border-radius:9px;background:#1b2129;color:var(--dim)}
+  .preset button.on{background:#1f6feb22;color:var(--blue);border-color:#1f6feb66}
+
+  .primary{background:#1f6feb;border-color:#1f6feb;color:#fff}
+  .primary:hover{background:#2f81f7}
+  .ghost{background:#1b2129;color:var(--dim);font-size:12px;padding:8px 12px}
+
+  .tasks{display:flex;flex-direction:column;gap:8px}
+  .task{display:flex;align-items:center;gap:10px;background:#0d1117;
+        border:1px solid var(--line);border-radius:11px;padding:10px 12px}
+  .task .badge{font-size:11px;padding:3px 8px;border-radius:6px;white-space:nowrap}
+  .badge.off{background:#8b2c3633;color:#ff9c96}
+  .badge.on{background:#1a7f3733;color:#7ee787}
+  .task .info{flex:1;min-width:0}
+  .task .main{font-size:13px}
+  .task .sub2{font-size:11.5px;color:var(--dim);margin-top:3px}
+  .task .remain{font-variant-numeric:tabular-nums;color:var(--blue);font-size:13px}
+  .task .cancel{border:0;background:transparent;color:var(--dim);font-size:16px;padding:4px 8px}
+  .task .cancel:hover{color:var(--red)}
+  .empty{color:var(--dim);font-size:12.5px;padding:6px 2px}
+  .clr{display:flex;justify-content:flex-end;margin-top:8px}
+
+  .setting{display:flex;align-items:center;justify-content:space-between;
+           background:#0d1117;border:1px solid var(--line);border-radius:12px;
+           padding:12px 14px;margin-bottom:8px}
+  .setting .t{font-size:13px}
+  .setting .d{font-size:11.5px;color:var(--dim);margin-top:3px}
+  .switch{position:relative;width:44px;height:24px;flex:none}
+  .switch input{opacity:0;width:0;height:0}
+  .slider{position:absolute;inset:0;background:#30363d;border-radius:24px;
+          cursor:pointer;transition:.2s}
+  .slider::before{content:"";position:absolute;width:18px;height:18px;left:3px;top:3px;
+                  background:#fff;border-radius:50%;transition:.2s}
+  .switch input:checked + .slider{background:var(--green)}
+  .switch input:checked + .slider::before{transform:translateX(20px)}
+
+  .meta{border-top:1px solid var(--line);margin-top:18px;padding-top:14px;
+        display:grid;grid-template-columns:1fr 1fr;gap:9px 18px;font-size:12.5px}
   .meta div{display:flex;justify-content:space-between;gap:8px}
   .meta b{color:var(--dim);font-weight:400;white-space:nowrap}
   .meta span{color:var(--txt);text-align:right;word-break:break-all}
 
-  .note{
-    margin-top:18px;padding:12px 14px;border-radius:12px;
-    background:rgba(88,166,255,.08);border:1px solid rgba(88,166,255,.25);
-    color:#a5c8ea;font-size:12.5px;line-height:1.7;
-  }
-  .urls{margin-top:12px;font-size:12px;color:var(--dim);line-height:1.8;word-break:break-all}
+  .note{margin-top:16px;padding:11px 13px;border-radius:12px;
+        background:rgba(88,166,255,.08);border:1px solid rgba(88,166,255,.25);
+        color:#a5c8ea;font-size:12px;line-height:1.7}
+  .urls{margin-top:10px;font-size:11.5px;color:var(--dim);line-height:1.8;word-break:break-all}
+  footer{margin-top:3px;font-size:11px;color:#6e7681;text-align:center}
 </style>
 </head>
 <body>
@@ -111,7 +150,65 @@
       <option value="5">5 秒</option>
       <option value="10">10 秒</option>
     </select>
-    （留时间把手从本机鼠标上移开）
+  </div>
+
+  <div class="section">
+    <div class="sec-title">⏱️ 倒计时<span class="hint">到点后自动执行一次</span></div>
+    <div class="row actions">
+      <div class="seg" id="cdAction">
+        <button data-v="off" class="active off">关闭屏幕</button>
+        <button data-v="on">点亮屏幕</button>
+      </div>
+      <div class="preset" id="cdPreset">
+        <button data-min="5">5 分</button>
+        <button data-min="15">15 分</button>
+        <button data-min="30">30 分</button>
+        <button data-min="60">60 分</button>
+      </div>
+    </div>
+    <div class="row">
+      <input id="cdMinutes" type="number" min="1" step="1" placeholder="分钟数" style="flex:1">
+      <button class="primary" id="cdStart">开始倒计时</button>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="sec-title">🕐 定时<span class="hint">在指定时刻执行</span></div>
+    <div class="row actions">
+      <div class="seg" id="scAction">
+        <button data-v="off" class="active off">关闭屏幕</button>
+        <button data-v="on">点亮屏幕</button>
+      </div>
+      <div class="seg" id="scRepeat">
+        <button data-v="once" class="active">仅一次</button>
+        <button data-v="daily">每天</button>
+      </div>
+    </div>
+    <div class="row">
+      <input id="scWhen" type="datetime-local" style="flex:1">
+      <input id="scTime" type="time" value="23:00" style="flex:1;display:none">
+      <button class="primary" id="scAdd">添加定时</button>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="sec-title">📋 待执行任务<span class="hint" id="taskHint">无</span></div>
+    <div class="tasks" id="taskList"><div class="empty">暂无任务</div></div>
+    <div class="clr"><button class="ghost" id="clearTasks">清除全部任务</button></div>
+  </div>
+
+  <div class="section">
+    <div class="sec-title">⚙️ 设置</div>
+    <div class="setting">
+      <div>
+        <div class="t">开机自启动</div>
+        <div class="d">登录 Windows 后自动在托盘运行，不弹窗口</div>
+      </div>
+      <label class="switch">
+        <input type="checkbox" id="autostart">
+        <span class="slider"></span>
+      </label>
+    </div>
   </div>
 
   <div class="meta">
@@ -129,6 +226,7 @@
     服务已阻止系统睡眠，可放心挂机。
   </div>
   <div class="urls" id="urls"></div>
+  <footer id="ver">ScreenOff-Web</footer>
 </div>
 
 <script>
@@ -138,7 +236,7 @@ const $ = id => document.getElementById(id);
   if (t) localStorage.setItem('sow_token', t);
 })();
 const TOKEN = localStorage.getItem('sow_token') || '';
-const api = p => TOKEN ? `${p}?token=${encodeURIComponent(TOKEN)}` : p;
+const api = p => TOKEN ? `${p}${p.includes('?') ? '&' : '?'}token=${encodeURIComponent(TOKEN)}` : p;
 
 function fmtDur(s){
   s = Math.max(0, Math.floor(s));
@@ -149,12 +247,21 @@ function fmtDur(s){
   if (m) return `${m} 分 ${sec} 秒`;
   return `${sec} 秒`;
 }
+function fmtRemain(s){
+  s = Math.max(0, Math.ceil(s));
+  const h = Math.floor(s/3600), m = Math.floor(s%3600/60), sec = s%60;
+  const mm = String(m).padStart(2,'0'), ss = String(sec).padStart(2,'0');
+  return h ? `${h}:${mm}:${ss}` : `${mm}:${ss}`;
+}
 
-async function refresh(){
+/* ---------------- 状态 ---------------- */
+let lastStatus = null;
+async function refreshStatus(){
   try{
     const r = await fetch(api('/api/status'));
     if (!r.ok) throw new Error(r.status);
     const d = await r.json();
+    lastStatus = d;
     $('net').className = 'net ok'; $('net').textContent = '服务在线';
     $('dot').className = 'dot ' + d.screen;
     $('state').textContent = d.screen === 'on' ? '亮屏中' : '已关闭';
@@ -169,31 +276,173 @@ async function refresh(){
       : fmtDur(d.input_idle_seconds);
     $('lc').textContent = d.last_change;
     $('now').textContent = d.now;
-    $('urls').textContent = '局域网访问：' + (d.lan_urls.join('　') || '（未检测到局域网 IP）');
+    $('urls').textContent = '局域网访问：' + (d.lan_urls.join('　') || '（未检测到）');
+    $('ver').textContent = `ScreenOff-Web v${d.version} · 作者 ${d.author} · MIT`;
+    if (!autostartDirty) $('autostart').checked = !!d.autostart;
   }catch(e){
     $('net').className = 'net bad'; $('net').textContent = '服务离线';
     $('state').textContent = '连接失败';
-    $('sub').textContent = '请确认电脑上的 server.py 正在运行';
+    $('sub').textContent = '请确认托盘程序正在运行';
   }
 }
-setInterval(refresh, 2000);
-refresh();
+
+/* ---------------- 任务 ---------------- */
+let tasks = [], tasksFetchedAt = 0, lastServerRemain = [];
+async function loadTasks(){
+  try{
+    const r = await fetch(api('/api/tasks'));
+    if (!r.ok) return;
+    const d = await r.json();
+    tasks = d.tasks || [];
+    lastServerRemain = tasks.map(t => t.remaining);
+    tasksFetchedAt = performance.now();
+    renderTasks();
+  }catch(e){}
+}
+function remainOf(t, i, elapsed){
+  const base = lastServerRemain[i] ?? t.remaining;
+  return Math.max(0, base - elapsed/1000);
+}
+function renderTasks(){
+  const now = performance.now();
+  const elapsed = now - tasksFetchedAt;
+  $('taskHint').textContent = tasks.length ? `${tasks.length} 个` : '无';
+  if (!tasks.length){
+    $('taskList').innerHTML = '<div class="empty">暂无任务</div>';
+    return;
+  }
+  $('taskList').innerHTML = tasks.map((t, i) => {
+    const remain = remainOf(t, i, elapsed);
+    const label = t.mode === 'countdown'
+      ? `${t.mode_text}`
+      : t.mode === 'daily' ? `每天 ${t.next_run_text.slice(11,16)}`
+      : t.next_run_text.slice(5,16);
+    return `<div class="task" data-id="${t.id}">
+      <span class="badge ${t.action}">${t.action_text}</span>
+      <div class="info">
+        <div class="main">${label}</div>
+        <div class="sub2">${t.mode === 'countdown'
+          ? '执行时间 ' + t.next_run_text.slice(11,19)
+          : (t.mode === 'daily' ? '下次 ' + t.next_run_text.slice(5,16) : '执行于 ' + t.next_run_text.slice(5,16))}</div>
+      </div>
+      <span class="remain">${fmtRemain(remain)}</span>
+      <button class="cancel" title="取消任务" data-cancel="${t.id}">✕</button>
+    </div>`;
+  }).join('');
+  document.querySelectorAll('[data-cancel]').forEach(btn => {
+    btn.onclick = async () => {
+      await fetch(api('/api/tasks/' + btn.dataset.cancel), {method:'DELETE'});
+      loadTasks();
+    };
+  });
+}
+setInterval(() => { if (tasks.length) renderTasks(); }, 1000);
+
+/* ---------------- 交互状态 ---------------- */
+let cdAction = 'off', scAction = 'off', scRepeat = 'once', autostartDirty = false;
+function bindSeg(id, setter){
+  const root = $(id);
+  root.querySelectorAll('button').forEach(b => {
+    b.onclick = () => {
+      root.querySelectorAll('button').forEach(x => x.classList.remove('active'));
+      b.classList.add('active');
+      setter(b.dataset.v);
+    };
+  });
+}
+bindSeg('cdAction', v => cdAction = v);
+bindSeg('scAction', v => scAction = v);
+bindSeg('scRepeat', v => {
+  scRepeat = v;
+  $('scWhen').style.display = v === 'once' ? '' : 'none';
+  $('scTime').style.display = v === 'daily' ? '' : 'none';
+});
+$('cdPreset').querySelectorAll('button').forEach(b => {
+  b.onclick = () => {
+    $('cdPreset').querySelectorAll('button').forEach(x => x.classList.remove('on'));
+    b.classList.add('on');
+    $('cdMinutes').value = b.dataset.min;
+  };
+});
 
 async function act(path){
   const d = Number($('delay').value || 0);
-  const btnOff = $('btn-off');
+  const btnOff = $('btn-off'), btnOn = $('btn-on');
   if (d > 0){
-    btnOff.disabled = true;
+    btnOff.disabled = btnOn.disabled = true;
     btnOff.textContent = `🌙 ${d} 秒后关闭…`;
     await new Promise(r => setTimeout(r, d * 1000));
-    btnOff.disabled = false;
+    btnOff.disabled = btnOn.disabled = false;
     btnOff.textContent = '🌙 关闭屏幕';
   }
   try{ await fetch(api(path), {method:'POST'}); }catch(e){}
-  refresh();
+  refreshStatus();
 }
 $('btn-off').onclick = () => act('/api/screen/off');
 $('btn-on').onclick  = () => act('/api/screen/on');
+
+$('cdStart').onclick = async () => {
+  const minutes = Number($('cdMinutes').value || 0);
+  if (!minutes || minutes <= 0) return alert('请输入大于 0 的分钟数');
+  await fetch(api('/api/tasks'), {
+    method: 'POST', headers: {'Content-Type':'application/json'},
+    body: JSON.stringify({mode:'countdown', action: cdAction, seconds: Math.round(minutes*60)})
+  });
+  $('cdMinutes').value = '';
+  $('cdPreset').querySelectorAll('button').forEach(x => x.classList.remove('on'));
+  loadTasks();
+};
+
+$('scAdd').onclick = async () => {
+  let body;
+  if (scRepeat === 'once'){
+    const v = $('scWhen').value;
+    if (!v) return alert('请选择日期和时间');
+    body = {mode:'once', action: scAction, at: v};
+  } else {
+    const v = $('scTime').value;
+    if (!v) return alert('请选择时间');
+    body = {mode:'daily', action: scAction, time: v};
+  }
+  const r = await fetch(api('/api/tasks'), {
+    method:'POST', headers:{'Content-Type':'application/json'}, body: JSON.stringify(body)
+  });
+  const d = await r.json();
+  if (!r.ok) return alert(d.error || '添加失败');
+  loadTasks();
+};
+
+$('clearTasks').onclick = async () => {
+  if (!tasks.length) return;
+  if (!confirm('确定清除全部定时任务？')) return;
+  await fetch(api('/api/tasks/clear'), {method:'POST'});
+  loadTasks();
+};
+
+$('autostart').onchange = async (e) => {
+  autostartDirty = true;
+  const enabled = e.target.checked;
+  const r = await fetch(api('/api/autostart'), {
+    method:'POST', headers:{'Content-Type':'application/json'},
+    body: JSON.stringify({enabled})
+  });
+  const d = await r.json();
+  e.target.checked = !!d.autostart;
+  autostartDirty = false;
+};
+
+/* 默认 datetime 为 30 分钟后的整分 */
+(function initWhen(){
+  const d = new Date(Date.now() + 30*60000);
+  d.setSeconds(0,0);
+  const p = n => String(n).padStart(2,'0');
+  $('scWhen').value = `${d.getFullYear()}-${p(d.getMonth()+1)}-${p(d.getDate())}T${p(d.getHours())}:${p(d.getMinutes())}`;
+})();
+
+setInterval(refreshStatus, 2000);
+refreshStatus();
+loadTasks();
+setInterval(loadTasks, 5000);
 </script>
 </body>
 </html>

@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Wix xmlns="http://schemas.microsoft.com/wix/2006/wi"
+     xmlns:util="http://schemas.microsoft.com/wix/UtilExtension"
+     xmlns:fire="http://schemas.microsoft.com/wix/FirewallExtension">
+
+  <Product Id="*"
+           Name="ScreenOff-Web"
+           Language="2052"
+           Version="$(var.Version)"
+           Manufacturer="atqiyu"
+           UpgradeCode="{9B7C2E4A-6F3D-4C2B-9A51-8E7D0C1F2B34}">
+
+    <Package InstallerVersion="500"
+             Compressed="yes"
+             InstallScope="perMachine"
+             Platform="x64"
+             Description="局域网网页控制显示器亮灭（只关屏不睡眠）"
+             Comments="https://github.com/atqiyu/ScreenOff-Web" />
+
+    <MajorUpgrade DowngradeErrorMessage="已安装 ScreenOff-Web 的更高版本，请先卸载。" />
+    <MediaTemplate EmbedCab="yes" />
+
+    <Property Id="ARPPRODUCTICON" Value="AppIcon" />
+    <Property Id="ARPHELPLINK" Value="https://github.com/atqiyu/ScreenOff-Web" />
+    <Property Id="ARPNOREPAIR" Value="1" />
+    <Property Id="MSIFASTINSTALL" Value="7" />
+
+    <CustomAction Id="StopScreenOffWeb"
+                  Directory="SystemFolder"
+                  ExeCommand="taskkill.exe /f /im ScreenOffWeb.exe"
+                  Execute="immediate"
+                  Return="ignore" />
+    <InstallExecuteSequence>
+      <Custom Action="StopScreenOffWeb" Before="InstallValidate">1</Custom>
+    </InstallExecuteSequence>
+
+    <Icon Id="AppIcon" SourceFile="$(var.SourceDir)\icon.ico" />
+
+    <Condition Message="ScreenOff-Web 需要 Windows 7 或更高版本。">
+      <![CDATA[VersionNT >= 601]]>
+    </Condition>
+
+    <Directory Id="TARGETDIR" Name="SourceDir">
+      <Directory Id="ProgramFiles64Folder">
+        <Directory Id="INSTALLFOLDER" Name="ScreenOff-Web">
+          <Component Id="MainExecutable" Guid="{4C1B9E52-2D7A-4F63-8C11-5A2E7B90D3C4}">
+            <File Id="ScreenOffWebExe"
+                  Source="$(var.SourceDir)\ScreenOffWeb.exe"
+                  KeyPath="yes">
+              <Shortcut Id="DesktopShortcut"
+                        Directory="DesktopFolder"
+                        Name="ScreenOff-Web"
+                        Description="局域网网页控制显示器亮灭"
+                        WorkingDirectory="INSTALLFOLDER"
+                        Advertise="yes"
+                        Icon="AppIcon" />
+              <Shortcut Id="StartMenuShortcut"
+                        Directory="ProgramMenuFolder"
+                        Name="ScreenOff-Web"
+                        Description="局域网网页控制显示器亮灭"
+                        WorkingDirectory="INSTALLFOLDER"
+                        Advertise="yes"
+                        Icon="AppIcon" />
+            </File>
+          </Component>
+
+          <Component Id="FirewallRule" Guid="{7E3A5D18-9B24-4C6F-A0D7-3F81C2E45B69}">
+            <RegistryValue Root="HKLM"
+                           Key="Software\atqiyu\ScreenOff-Web"
+                           Name="Installed"
+                           Type="integer"
+                           Value="1"
+                           KeyPath="yes" />
+            <fire:FirewallException Id="WebPort"
+                                    Name="ScreenOff-Web (TCP 8800)"
+                                    Port="8800"
+                                    Protocol="tcp"
+                                    Scope="any"
+                                    IgnoreFailure="yes" />
+          </Component>
+        </Directory>
+      </Directory>
+
+      <Directory Id="DesktopFolder" />
+      <Directory Id="ProgramMenuFolder" />
+      <Directory Id="SystemFolder" />
+    </Directory>
+
+    <Feature Id="Main" Title="ScreenOff-Web" Level="1">
+      <ComponentRef Id="MainExecutable" />
+      <ComponentRef Id="FirewallRule" />
+    </Feature>
+
+    <UIRef Id="WixUI_Minimal" />
+    <WixVariable Id="WixUILicenseRtf"
+                 Value="$(var.InstallerDir)\License.rtf" />
+  </Product>
+</Wix>
