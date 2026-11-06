@@ -21,6 +21,8 @@
 
 ## 下载安装
 
+前往 [Releases](https://github.com/atqiyu/ScreenOff-Web/releases/latest) 下载最新的 `ScreenOffWeb.exe` 或 `ScreenOffWeb-1.1.0.msi`。
+
 两种方式，任选其一：
 
 | 方式 | 文件 | 说明 |
