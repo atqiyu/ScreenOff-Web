@@ -1,5 +1,6 @@
-# bat 必须是 CRLF，否则 cmd 解析会错位（项目最初就是踩了这个坑）
-*.bat text eol=crlf
+# bat 必须是 CRLF，否则 cmd 解析会错位（项目最初就是踩了这个坑）。
+# 用 -text 让 Git 原样保存字节，检出、归档、Download ZIP 都不会转换换行。
+*.bat -text
 # 文档与源码在仓库内统一 LF
 *.py   text eol=lf
 *.html text eol=lf
